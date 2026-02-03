@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desktop Goblin - Your Mischievous System Monitor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&family=Crimson+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --goblin-green: #7ac943;
+            --dark-cave: #1a1a1a;
+            --stone-grey: #2a2a2a;
+            --parchment: #f4e8d0;
+            --torch-orange: #ff6b35;
+            --shadow-purple: #2d1b4e;
+            --gold: #ffd700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: linear-gradient(135deg, var(--dark-cave) 0%, var(--shadow-purple) 100%);
+            color: var(--parchment);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated cave atmosphere */
+        body::before {
+            content: '';
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(122, 201, 67, 0.03) 0%, transparent 30%),
+                radial-gradient(circle at 80% 20%, rgba(255, 107, 53, 0.02) 0%, transparent 25%);
+            animation: float 30s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-30px, -30px) rotate(5deg); }
+            66% { transform: translate(20px, 40px) rotate(-3deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .logo {
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            color: var(--goblin-green);
+            text-shadow: 
+                3px 3px 0 rgba(0, 0, 0, 0.8),
+                0 0 20px rgba(122, 201, 67, 0.5);
+            letter-spacing: 2px;
+            transform: rotate(-2deg);
+        }
+
+        .download-btn {
+            font-family: 'Patrick Hand', cursive;
+            background: linear-gradient(135deg, var(--goblin-green) 0%, #5a9933 100%);
+            color: var(--dark-cave);
+            padding: 0.8rem 2rem;
+            border: 3px solid var(--gold);
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 
+                0 6px 0 #4a7923,
+                0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: all 0.2s;
+            position: relative;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-5px) rotate(-2deg); }
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px) rotate(-2deg) scale(1.05);
+            box-shadow: 
+                0 8px 0 #4a7923,
+                0 15px 30px rgba(0, 0, 0, 0.6);
+            animation: none;
+        }
+
+        .download-btn:active {
+            transform: translateY(2px) rotate(-2deg);
+            box-shadow: 
+                0 3px 0 #4a7923,
+                0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0 6rem;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 1s ease-out 0.3s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: var(--goblin-green);
+            text-shadow: 
+                4px 4px 0 rgba(0, 0, 0, 0.8),
+                0 0 40px rgba(122, 201, 67, 0.6);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: 3px;
+        }
+
+        .hero .subtitle {
+            font-family: 'Patrick Hand', cursive;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            color: var(--parchment);
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            transform: rotate(-1deg);
+        }
+
+        .hero .goblin-placeholder {
+            width: 100px;
+            height: 100px;
+            margin: 3rem auto;
+            background: radial-gradient(circle at 30% 30%, rgba(122, 201, 67, 0.2), transparent);
+            border: 4px dashed var(--goblin-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.5rem;
+            color: var(--goblin-green);
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+            animation: pendulum 4s ease-in-out infinite, pulse 3s ease-in-out infinite;
+        }
+
+		@keyframes pendulum {
+			0%   { transform: rotate(30deg); }
+			50%  { transform: rotate(-30deg); }
+			100% { transform: rotate(30deg); }
+		}
+
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 10px 50px rgba(122, 201, 67, 0.3); }
+            50% { box-shadow: 0 10px 80px rgba(122, 201, 67, 0.6); }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(42, 42, 42, 0.5) 50%, transparent 100%);
+            position: relative;
+        }
+
+        .features h2 {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--gold);
+            text-shadow: 
+                3px 3px 0 rgba(0, 0, 0, 0.8),
+                0 0 30px rgba(255, 215, 0, 0.4);
+            letter-spacing: 2px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            animation: fadeIn 1s ease-out 0.5s backwards;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, var(--stone-grey) 0%, var(--dark-cave) 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid rgba(122, 201, 67, 0.3);
+            box-shadow: 
+                inset 0 2px 10px rgba(0, 0, 0, 0.5),
+                0 8px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(122, 201, 67, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) rotate(1deg);
+            border-color: var(--goblin-green);
+            box-shadow: 
+                inset 0 2px 10px rgba(0, 0, 0, 0.5),
+                0 15px 40px rgba(122, 201, 67, 0.3);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        .feature-card:hover .feature-icon {
+            animation: spin 0.5s ease-in-out;
+        }
+
+        .feature-card h3 {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.8rem;
+            color: var(--goblin-green);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .feature-card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--parchment);
+            opacity: 0.9;
+        }
+
+        /* Personality Section */
+        .personality {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .personality .quote-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(45, 27, 78, 0.6);
+            padding: 3rem;
+            border-radius: 30px;
+            border: 3px solid var(--torch-orange);
+            box-shadow: 
+                inset 0 4px 20px rgba(0, 0, 0, 0.5),
+                0 15px 50px rgba(255, 107, 53, 0.3);
+            position: relative;
+            animation: fadeIn 1s ease-out 0.7s backwards;
+        }
+
+        .personality .quote-box::before,
+        .personality .quote-box::after {
+            content: '"';
+            font-family: 'Bangers', cursive;
+            font-size: 6rem;
+            color: var(--torch-orange);
+            position: absolute;
+            opacity: 0.3;
+        }
+
+        .personality .quote-box::before {
+            top: -20px;
+            left: 20px;
+        }
+
+        .personality .quote-box::after {
+            bottom: -60px;
+            right: 20px;
+        }
+
+        .personality p {
+            font-family: 'Patrick Hand', cursive;
+            font-size: clamp(1.3rem, 2.5vw, 2rem);
+            color: var(--parchment);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .personality em {
+            color: var(--goblin-green);
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(122, 201, 67, 0.1) 0%, rgba(255, 107, 53, 0.1) 100%);
+            border-top: 2px solid rgba(122, 201, 67, 0.3);
+            border-bottom: 2px solid rgba(122, 201, 67, 0.3);
+        }
+
+        .cta h2 {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--goblin-green);
+            margin-bottom: 2rem;
+            text-shadow: 
+                3px 3px 0 rgba(0, 0, 0, 0.8),
+                0 0 40px rgba(122, 201, 67, 0.6);
+            letter-spacing: 2px;
+        }
+
+        .cta p {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--parchment);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(122, 201, 67, 0.2);
+        }
+
+        footer p {
+            color: var(--parchment);
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--goblin-green);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: var(--torch-orange);
+        }
+
+        /* Decorative elements */
+        .torch {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, var(--torch-orange) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.6;
+            animation: flicker 3s ease-in-out infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.1); }
+        }
+
+        .torch-left {
+            top: 20%;
+            left: 5%;
+        }
+
+        .torch-right {
+            top: 60%;
+            right: 5%;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .personality .quote-box {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative torches -->
+    <div class="torch torch-left"></div>
+    <div class="torch torch-right"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">DESKTOP GOBLIN</div>
+            <a href="https://youritch.io/link" class="download-btn">Download Free!</a>
+        </header>
+
+        <section class="hero">
+            <h1>Meet Your New<br>Desktop Companion</h1>
+            <p class="subtitle">He's chatty. He's quirky. He's surprisingly helpful.</p>
+            <div class="goblin-placeholder">
+                    <img 
+						src="assets/images/DesktopGoblin_Head.png" 
+						alt="Desktop Goblin character"
+						class="goblin-image"
+					/>
+            </div>
+            <a href="https://youritch.io/link" class="download-btn">Get Desktop Goblin</a>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2>What's in the Cave?</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">📊</span>
+                        <h3>Real-Time Monitoring</h3>
+                        <p>Track CPU, RAM, disk, network, battery, and GPU performance - all in one friendly companion that stays out of your way.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">💬</span>
+                        <h3>Actually Talks to You</h3>
+                        <p>Forget boring notifications. Get friendly warnings, helpful tips, and the occasional joke when Chrome eats all your RAM.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🎮</span>
+                        <h3>Procrastination Approved</h3>
+                        <p>Built-in mini-games for when you need a break. Your goblin gets bored too.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🔔</span>
+                        <h3>Smart Alerts</h3>
+                        <p>Get notified about the stuff that actually matters. Pattern-based warnings mean fewer false alarms, more useful info.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">📝</span>
+                        <h3>The Goblin's Log</h3>
+                        <p>A full history of what's been happening on your system, with personality. Simple mode for quick checks, advanced mode for power users.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🎨</span>
+                        <h3>Your Goblin, Your Rules</h3>
+                        <p>Customize thresholds, appearance, and behavior. Want him quiet? Mute him. Want more attitude? He's got plenty.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="personality">
+            <div class="container">
+                <div class="quote-box">
+                    <p>Whoa! Chrome is using <em>3.2 GB of RAM</em>!</p>
+                    <p>Maybe close some tabs, just sayin'...</p>
+                    <p style="font-size: 1.2rem; opacity: 0.7; margin-top: 2rem;">
+                        — Your Desktop Goblin, probably
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <h2>Ready to Meet Your Goblin?</h2>
+                <p>Free download. Windows & macOS. No credit card. Just a goblin.</p>
+                <a href="https://youritch.io/link" class="download-btn">Download from itch.io</a>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2026 Desktop Goblin | Made with ❤️ and a little bit of mischief</p>
+                <p style="margin-top: 1rem;">
+                    <a href="/cdn-cgi/l/email-protection#bbd3ded7d7d4fbdfdec8d0cfd4cbdcd4d9d7d2d595d2d4">Contact</a> • 
+                    <a href="#">Privacy</a> • 
+                    <a href="#">Support</a>
+                </p>
+            </div>
