@@ -390,6 +390,14 @@
             color: var(--torch-orange);
         }
 
+		.platform-support {
+	    font-family: 'Patrick Hand', cursive;
+	    font-size: 1rem;
+	    opacity: 0.7;
+	    margin-bottom: 2rem;
+	    letter-spacing: 1px;
+		}
+
         /* Decorative elements */
         .torch {
             position: fixed;
@@ -448,33 +456,49 @@
             <div class="logo">DESKTOP GOBLIN</div>
         </header>
 
-        <section class="hero">
-            <h1>Meet Your New<br>Desktop Companion</h1>
-            <p class="subtitle">"Your PC's health... explained by a goblin. Who doesn't want that!?"</p>
-            <div class="goblin-placeholder">
-                    <img 
-						src="assets/images/DesktopGoblin_Head.png" 
-						alt="Desktop Goblin character"
-						class="goblin-image"
-					/>
-            </div>
-            <a href="https://youritch.io/link" class="download-btn">Get Desktop Goblin</a>
-        </section>
+		<section class="hero">
+		    <h1>Meet Your New<br>Desktop Companion</h1>
+		
+		    <p class="subtitle">
+		        "Your computer's health... as explained by a goblin. Now, who doesn't want that!?"
+		    </p>
+		
+		    <p style="opacity: 0.8; max-width: 700px; margin: 0 auto 2rem;">
+		        Desktop Goblin is a lightweight desktop companion that monitors system health 
+		        in real-time and explains what’s happening — in plain English.
+		    </p>
+		
+		    <p class="platform-support">
+		        Supports Windows & macOS
+		    </p>
+		
+		    <div class="goblin-placeholder">
+		        <img 
+		            src="assets/images/DesktopGoblin_Head.png" 
+		            alt="Desktop Goblin character"
+		            class="goblin-image"
+		        />
+		    </div>
+		
+		    <a href="mailto:hello@desktopgoblin.com?subject=Desktop Goblin Early Access" 
+		       class="download-btn">
+		        Get Early Access
+		    </a>
+		</section>
 
         <section class="features">
             <div class="container">
                 <h2>Coming soon!</h2>
-                <div class="feature-grid">
 					<div class="feature-grid">
 					    <div class="feature-card">
 					        <span class="feature-icon">🖥️</span>
-					        <h3>Your PC at a Glance</h3>
-					        <p>CPU, RAM, disk, network, battery, GPU - all visible in a persistent overlay that stays on your desktop. No windows to open, no apps to check. Just glance and know.</p>
+					        <h3>Your Computer at a Glance</h3>
+					        <p>CPU, RAM, Disk, Network, Battery, GPU, Wifi Signal Strength - all visible in a persistent overlay that stays on your desktop. No windows to open, no apps to check. Just glance and know.</p>
 					    </div>
 					    <div class="feature-card">
 					        <span class="feature-icon">💬</span>
 					        <h3>Actually Talks to You</h3>
-					        <p>Task Manager shows you numbers. Your goblin tells you what they mean in plain, friendly language. No computer experts needed for interpretation.</p>
+					        <p>Task Manager, Activity Monitor: these show you numbers. Your goblin tells you what they mean in plain, friendly language. No computer experts needed for interpretation.</p>
 					    </div>
 					    <div class="feature-card">
 					        <span class="feature-icon">🔔</span>
