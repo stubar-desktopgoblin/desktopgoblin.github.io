@@ -526,18 +526,22 @@
 		        <h2 style="font-family: 'Bangers', cursive; font-size: clamp(2.5rem, 5vw, 4rem); color: var(--gold); text-shadow: 3px 3px 0 rgba(0,0,0,0.8), 0 0 30px rgba(255,215,0,0.4); letter-spacing: 2px; margin-bottom: 1.5rem;">See Him in Action</h2>
 		        <p style="font-family: 'Patrick Hand', cursive; font-size: 1.3rem; margin-bottom: 3rem; opacity: 0.8;">Status window, logbook, speech bubbles — the whole package.</p>
 		        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-		            <img src="assets/images/DesktopGoblin_Screenshot1.png" alt="Desktop Goblin status window and logbook report" style="width: 100%; border-radius: 12px; border: 2px solid rgba(122,201,67,0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.5);" />
-		            <img src="assets/images/DesktopGoblin_Screenshot2.png" alt="Desktop Goblin logbook with alert cards" style="width: 100%; border-radius: 12px; border: 2px solid rgba(122,201,67,0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.5);" />
-		            <img src="assets/images/DesktopGoblin_Screenshot3.png" alt="Desktop Goblin speech bubble alert" style="width: 100%; border-radius: 12px; border: 2px solid rgba(122,201,67,0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.5);" />
+		            <img src="assets/images/DesktopGoblin_Screenshot1.png" alt="Desktop Goblin status window and logbook report" style="width: 100%; border-radius: 12px; border: 2px solid rgba(122,201,67,0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.5); cursor: zoom-in;" onclick="document.getElementById('lightbox-img').src=this.src;document.getElementById('lightbox').style.display='flex';" />
+		            <img src="assets/images/DesktopGoblin_Screenshot2.png" alt="Desktop Goblin logbook with alert cards" style="width: 100%; border-radius: 12px; border: 2px solid rgba(122,201,67,0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.5); cursor: zoom-in;" onclick="document.getElementById('lightbox-img').src=this.src;document.getElementById('lightbox').style.display='flex';" />
+		            <img src="assets/images/DesktopGoblin_Screenshot3.png" alt="Desktop Goblin speech bubble alert" style="width: 100%; border-radius: 12px; border: 2px solid rgba(122,201,67,0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.5); cursor: zoom-in;" onclick="document.getElementById('lightbox-img').src=this.src;document.getElementById('lightbox').style.display='flex';" />
 		        </div>
 		    </div>
 		</section>
+
+		<div id="lightbox" onclick="this.style.display='none'" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; cursor:zoom-out; justify-content:center; align-items:center;">
+		    <img id="lightbox-img" style="max-width:90%; max-height:90%; border-radius:8px;" />
+		</div>
 	
         <section class="personality">
             <div class="container">
 				<div class="quote-box">
-				    <p>Hey — <em>Chrome's been using a lot of resources</em> for the last 20 minutes.</p>
-				    <p>That's probably why things feel slow right now.</p>
+					<p>Whoa, <em>comet</em> is working hard!</p>
+				    <p>Maybe give it a rest if things feel sluggish.</p>
 				    <p style="font-size: 1.2rem; opacity: 0.7; margin-top: 2rem;">
 				        — Your Desktop Goblin, keeping an eye on things
 				    </p>
